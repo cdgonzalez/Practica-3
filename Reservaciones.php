@@ -18,8 +18,8 @@
                      <div class="container">
                         <div id="avion" class="container">
                             <h4 class="text-center">Aviones</h4>
-                            <label class="col-form-label" for="origen_avion">Origen:  <input class="form-control" type="text" id="origen_avion" name="origen_avion"></label>
-                            <label class="col-form-label" for="destino_avion">Destino: <input class="form-control" id="destino_avion" name="destino_avion" type="list"></label>
+                            <label class="col-form-label" for="origen_avion">Origen: <div class="form-control selector-origen"><select name="" id=""></select></div></label>
+                            <label class="col-form-label" for="destino_avion">Destino: <div class="form-control selector-destino"><select name="" id=""></select></div></label>
                         </div>
                      </div>
                  </div>
@@ -39,8 +39,32 @@
 
 
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="js/jquery-3.3.1.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: "getDestino.php",
+            success: function(response)
+            {
+                $('.selector-origen select').html(response).fadeIn();
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "https://localhost:8080/aviones/index.php/getAvionDestino",
+            success: function(response)
+            {
+                $('.selector-destino select').html(response).fadeIn();
+            }
+        });
+    });
+
+    </script>
+
 
 </html>
